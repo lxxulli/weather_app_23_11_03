@@ -13,7 +13,13 @@ export const getWeather = () => {
   const lat = 35.15805555399276;
   const lon = 129.0597635917639;
 
-  return instane.get(`weather?lat=${lat}&lon=${lon}`);
+  return instane
+    .get(`weather?lat=${lat}&lon=${lon}`)
+    .then((response) => response.data);
   // instane는 변수명이라 변경 가능
   // () 안에는 요청하고자 하는 값
 };
+
+// api = 서버, 백엔드
+// then = 요청하고난 다음에
+// response가 길어서 res로 쓰기도 함
