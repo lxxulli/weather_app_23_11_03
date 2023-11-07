@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "../api";
 import styled from "styled-components";
+import { useCurrenWeather } from "../lib/useCurrenWeather";
+import { Loading } from "../components/Loading";
 
 const Wrap = styled.div`
   max-width: 400px;
@@ -17,6 +19,7 @@ const Wrap = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 100px 20px;
+  color: white;
 `;
 const Location = styled.div`
   font-size: 30px;
@@ -29,8 +32,13 @@ const Temp = styled.div`
 const Dese = styled.div`
   font-size: 18px;
 `;
-const Separ = styled.div``;
+const Separ = styled.div`
+  width: 50px;
+  height: 5px;
+  background-color: white;
+`;
 const ConWrap = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +49,7 @@ const Con = styled.div`
   justify-content: center;
   align-items: center;
   width: 33%;
-  border-right: 1px solid #111;
+  border-right: 1px solid white;
   &:last-child {
     border-right: none;
   }
@@ -56,8 +64,11 @@ const Con = styled.div`
 `;
 
 export const Home = () => {
+  const { lat, lon } = useCurrenWeather();
+  console.log(lat, lon);
+
   const { data, isLoading } = useQuery({
-    queryKey: ["weather"],
+    queryKey: ["weather", lat, lon],
     queryFn: getWeather,
   });
   // - api에 요청할 때 사용한 hook
@@ -66,16 +77,16 @@ export const Home = () => {
 
   console.log(isLoading);
 
-  const {
-    name,
-    main: { temp },
-  } = data;
+  // const {
+  //   name,
+  //   main: { temp },
+  // } = data;
   //  비구조화 활당을 이용하면 코드가 짧아짐
 
   return (
     <>
       {isLoading ? (
-        "loading"
+        <Loading />
       ) : (
         <Wrap>
           <Location>{data?.name}</Location>

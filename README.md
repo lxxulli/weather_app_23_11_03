@@ -5,8 +5,9 @@
 ## TODO
 
 - [x] 경로 설정
-- [] api 연결 설정
-- [] axios, useQuery
-- [] UI 제작, helmet 설정
-- [] 현재 위치 얻어오기
-- [] 배고 (deploy)
+- [x] api 연결 설정
+- [x] axios, useQuery
+- [x] UI 제작, helmet 설정
+- [x] 현재 위치 얻어오기
+- [x] 로딩 UI
+- [x] 배포 (deploy)
